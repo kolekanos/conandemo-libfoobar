@@ -3,6 +3,7 @@ Foo/0.1.0@kolekanos/testing
 Bar/0.1.0@kolekanos/testing
 
 [generators]
+CMakeToolchain
 CMakeDeps
 virtualenv
 
