@@ -41,8 +41,6 @@ Packages
 Installing (downloading, building) binaries...
 Bar/0.1.0@kolekanos/testing: Already installed!
 Foo/0.1.0@kolekanos/testing: Already installed!
-conanfile.txt: Generator 'CMakeDeps' calling 'generate()'
-conanfile.txt: Generator txt created conanbuildinfo.txt
 conanfile.txt: Generator virtualenv created activate.bat
 conanfile.txt: Generator virtualenv created deactivate.bat
 conanfile.txt: Generator virtualenv created environment.bat.env
@@ -52,13 +50,18 @@ conanfile.txt: Generator virtualenv created environment.ps1.env
 conanfile.txt: Generator virtualenv created activate.sh
 conanfile.txt: Generator virtualenv created deactivate.sh
 conanfile.txt: Generator virtualenv created environment.sh.env
+conanfile.txt: Generator 'CMakeDeps' calling 'generate()'
+conanfile.txt: Generator txt created conanbuildinfo.txt
+conanfile.txt: Generator 'CMakeToolchain' calling 'generate()'
 conanfile.txt: Aggregating env generators
 conanfile.txt: Generated conaninfo.txt
 conanfile.txt: Generated graphinfo
 $ source activate.sh
-$ cmake .. -G "MSYS Makefiles" -DCMAKE_INSTALL_PREFIX=$PWD/../install -DCMAKE_VERBOSE_MAKEFILE=ON
+$ cmake .. -G "MSYS Makefiles" -DCMAKE_INSTALL_PREFIX=$PWD/../install -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake
+Using Conan toolchain through conan_toolchain.cmake.
 -- The C compiler identification is GNU 10.3.0
 -- Detecting C compiler ABI info
+Using Conan toolchain through .
 -- Detecting C compiler ABI info - done
 -- Check for working C compiler: C:/msys64/mingw64/bin/gcc.exe - skipped
 -- Detecting C compile features
@@ -71,27 +74,19 @@ $ cmake .. -G "MSYS Makefiles" -DCMAKE_INSTALL_PREFIX=$PWD/../install -DCMAKE_VE
 -- Generating done
 -- Build files have been written to: C:/msys64/home/kolekanos/conandemo-libfoobar/build
 $ cmake --build .
-/C/msys64/mingw64/bin/cmake.exe -S/C/msys64/home/kolekanos/conandemo-libfoobar -B/C/msys64/home/kolekanos/conandemo-libfoobar/build --check-build-system CMakeFiles/Makefile.cmake 0
-/C/msys64/mingw64/bin/cmake.exe -E cmake_progress_start /C/msys64/home/kolekanos/conandemo-libfoobar/build/CMakeFiles /C/msys64/home/kolekanos/conandemo-libfoobar/build//CMakeFiles/progress.marks
-/usr/bin/make  -f CMakeFiles/Makefile2 all
-make[1]: Entering directory '/home/kolekanos/conandemo-libfoobar/build'
-/usr/bin/make  -f source/CMakeFiles/FooBar.dir/build.make source/CMakeFiles/FooBar.dir/depend
-make[2]: Entering directory '/home/kolekanos/conandemo-libfoobar/build'
-/C/msys64/mingw64/bin/cmake.exe -E cmake_depends "MSYS Makefiles" /C/msys64/home/kolekanos/conandemo-libfoobar /C/msys64/home/kolekanos/conandemo-libfoobar/source /C/msys64/home/kolekanos/conandemo-libfoobar/build /C/msys64/home/kolekanos/conandemo-libfoobar/build/source /C/msys64/home/kolekanos/conandemo-libfoobar/build/source/CMakeFiles/FooBar.dir/DependInfo.cmake --color=
-make[2]: Leaving directory '/home/kolekanos/conandemo-libfoobar/build'
-/usr/bin/make  -f source/CMakeFiles/FooBar.dir/build.make source/CMakeFiles/FooBar.dir/build
-make[2]: Entering directory '/home/kolekanos/conandemo-libfoobar/build'
 [ 50%] Building C object source/CMakeFiles/FooBar.dir/foobar.c.obj
-cd /C/msys64/home/kolekanos/conandemo-libfoobar/build/source && /C/msys64/mingw64/bin/gcc.exe  -I/C/msys64/home/kolekanos/conandemo-libfoobar/include  -MD -MT source/CMakeFiles/FooBar.dir/foobar.c.obj -MF CMakeFiles/FooBar.dir/foobar.c.obj.d -o CMakeFiles/FooBar.dir/foobar.c.obj -c /C/msys64/home/kolekanos/conandemo-libfoobar/source/foobar.c
-C:/msys64/home/kolekanos/conandemo-libfoobar/source/foobar.c:1:10: fatal error: foo/foo.h: No such file or directory
-    1 | #include <foo/foo.h>
-      |          ^~~~~~~~~~~
-compilation terminated.
-make[2]: *** [source/CMakeFiles/FooBar.dir/build.make:79: source/CMakeFiles/FooBar.dir/foobar.c.obj] Error 1
-make[2]: Leaving directory '/home/kolekanos/conandemo-libfoobar/build'
-make[1]: *** [CMakeFiles/Makefile2:101: source/CMakeFiles/FooBar.dir/all] Error 2
-make[1]: Leaving directory '/home/kolekanos/conandemo-libfoobar/build'
-make: *** [Makefile:139: all] Error 2
+[100%] Linking C static library libFooBar.a
+[100%] Built target FooBar
+$ cmake --install .
+-- Install configuration: "Release"
+-- Installing: C:/msys64/home/kolekanos/conandemo-libfoobar/install/lib/libFooBar.a
+-- Installing: C:/msys64/home/kolekanos/conandemo-libfoobar/install/share/FooBar/cmake/FooBarTargets.cmake
+-- Installing: C:/msys64/home/kolekanos/conandemo-libfoobar/install/share/FooBar/cmake/FooBarTargets-release.cmake
+-- Installing: C:/msys64/home/kolekanos/conandemo-libfoobar/install/share/FooBar/cmake/FooBarConfig.cmake
+-- Installing: C:/msys64/home/kolekanos/conandemo-libfoobar/install/share/FooBar/cmake/FooBarConfigVersion.cmake
+-- Installing: C:/msys64/home/kolekanos/conandemo-libfoobar/install/include
+-- Installing: C:/msys64/home/kolekanos/conandemo-libfoobar/install/include/foobar
+-- Installing: C:/msys64/home/kolekanos/conandemo-libfoobar/install/include/foobar/foobar.h
 ```
 
 with `profile-k`:
